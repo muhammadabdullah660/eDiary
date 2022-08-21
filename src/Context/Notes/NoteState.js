@@ -15,25 +15,34 @@ const NoteState = (props) => {
   //     }, 1000);
   //   };
   const host = "http://localhost:5000";
-  const initialNotes = [
-    {
-      _id: "62fe76b18425094624b9fa6c",
-      user: "62fbad228398b46cc1117204",
-      title: "First note",
-      description: "this is my very first note to me",
-      tag: "personal",
-      date: "2022-08-18T17:28:17.897Z",
-      __v: 0,
-    },
-  ];
+  const initialNotes = [];
   const [notes, setnotes] = useState(initialNotes);
+
+  //Fecth all notes
+  const fetchNotes = async () => {
+    //API Call
+    // Example POST method implementation:
+    // Default options are marked with *
+    const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        authToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
+      },
+    });
+    const json = await response.json(); // parses JSON response into native JavaScript objects
+
+    console.log(json);
+    setnotes(json);
+  };
 
   //Add a note
   const addNote = async (title, description, tag) => {
     //API Call
     // Example POST method implementation:
     // Default options are marked with *
-    const response = await fetch(`${host}/api/notes/addnote/}`, {
+    const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +101,9 @@ const NoteState = (props) => {
   };
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
+    <NoteContext.Provider
+      value={{ notes, addNote, deleteNote, editNote, fetchNotes }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
