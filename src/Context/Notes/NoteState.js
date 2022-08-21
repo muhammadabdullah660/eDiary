@@ -14,6 +14,7 @@ const NoteState = (props) => {
   //       });
   //     }, 1000);
   //   };
+  const host = "http://localhost:5000";
   const initialNotes = [
     {
       _id: "62fe76b18425094624b9fa6c",
@@ -28,7 +29,22 @@ const NoteState = (props) => {
   const [notes, setnotes] = useState(initialNotes);
 
   //Add a note
-  const addNote = (title, description, tag) => {
+  const addNote = async (title, description, tag) => {
+    //API Call
+    // Example POST method implementation:
+    // Default options are marked with *
+    const response = await fetch(`${host}/api/notes/addnote/}`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        authToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
+      },
+      body: JSON.stringify(title, description, tag), // body data type must match "Content-Type" header
+    });
+    const json = response.json(); // parses JSON response into native JavaScript objects
+
     let note = {
       _id: "62ffd484ed1bd8a84834ab47",
       user: "62fbad228398b46cc1117204",
@@ -48,7 +64,32 @@ const NoteState = (props) => {
     setnotes(delNote);
   };
   //Edit a note
-  const editNote = () => {};
+  const editNote = async (id, description, title, tag) => {
+    //API Call
+    // Example POST method implementation:
+    // Default options are marked with *
+    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        authToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
+      },
+      body: JSON.stringify(title, description, tag), // body data type must match "Content-Type" header
+    });
+    const json = response.json(); // parses JSON response into native JavaScript objects
+
+    //Logic to edit in client
+    for (let index = 0; index < notes.length; index++) {
+      const element = notes[index];
+      if (element._id === id) {
+        element.title = title;
+        element.description = description;
+        element.tag = tag;
+      }
+    }
+  };
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
