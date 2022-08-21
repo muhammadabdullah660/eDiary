@@ -41,9 +41,14 @@ const NoteState = (props) => {
     setnotes(notes.concat(note));
   };
   // Delete a note
-  const deleteNote = (second) => {};
+  const deleteNote = (id) => {
+    const delNote = notes.filter((note) => {
+      return note._id !== id;
+    });
+    setnotes(delNote);
+  };
   //Edit a note
-  const editNote = (second) => {};
+  const editNote = () => {};
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>

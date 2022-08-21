@@ -55,7 +55,7 @@ const AddNote = () => {
               onChange={onChange}
             />
           </div>
-          <div className="form-check">
+          {/* <div className="form-check">
             <input
               type="checkbox"
               className="form-check-input"
@@ -64,13 +64,13 @@ const AddNote = () => {
             <label className="form-check-label" htmlFor="exampleCheck1">
               Check me out
             </label>
-          </div>
+          </div> */}
           <button
             type="submit"
             onClick={handleAddClick}
             className="btn btn-primary"
           >
-            Submit
+            Add note
           </button>
         </form>
       </div>
