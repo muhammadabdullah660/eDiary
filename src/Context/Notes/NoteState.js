@@ -1,19 +1,6 @@
 import NoteContext from "./noteContext";
 import { useState } from "react";
 const NoteState = (props) => {
-  //   const state0 = {
-  //     name: "Abd",
-  //     class: "21",
-  //   };
-  //   const [state, setstate] = useState(state0);
-  //   const update = () => {
-  //     setTimeout(() => {
-  //       setstate({
-  //         name: "gg",
-  //         class: "19",
-  //       });
-  //     }, 1000);
-  //   };
   const host = "http://localhost:5000";
   const initialNotes = [];
   const [notes, setnotes] = useState(initialNotes);
@@ -31,9 +18,7 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
       },
     });
-    const json = await response.json(); // parses JSON response into native JavaScript objects
-
-    console.log(json);
+    const json = await response.json(); // all notes
     setnotes(json);
   };
 
@@ -47,19 +32,9 @@ const NoteState = (props) => {
         authToken:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
       },
-      body: JSON.stringify(title, description, tag), // body data type must match "Content-Type" header
+      body: JSON.stringify({ title, description, tag }),
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
-
-    let note = {
-      _id: "62ffd484ed1bd8a84834ab47",
-      user: "62fbad228398b46cc1117204",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2022-08-19T18:20:52.902Z",
-      __v: 0,
-    };
+    const note = await response.json();
     setnotes(notes.concat(note));
   };
   // Delete a note
