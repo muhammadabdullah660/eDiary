@@ -5,23 +5,23 @@ import AddNote from "./AddNote";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, fetchNotes, addNote } = context;
+  const { notes, fetchNotes } = context;
   useEffect(() => {
     fetchNotes();
     // eslint-disable-next-line
   }, []);
   const ref = useRef(null);
-  const updateNote = (note) => {
+  const updateNote = (currentNote) => {
     ref.current.click();
+    setnote(currentNote);
   };
   const [note, setnote] = useState({
     title: "",
     description: "",
     tag: "",
   });
-  const handleAddClick = (e) => {
+  const handleUpdClick = (e) => {
     e.preventDefault();
-    addNote(note.title, note.description, note.tag);
   };
   const onChange = (e) => {
     setnote({ ...note, [e.target.name]: e.target.value });
@@ -67,7 +67,7 @@ const Notes = () => {
             <div className="modal-body">
               {/* Edit form */}
               <div className="container my-3">
-                <h1>Add a Note</h1>
+                <h1>Your Note</h1>
                 <form>
                   <div className="form-group">
                     <label htmlFor="title">Title</label>
@@ -76,6 +76,7 @@ const Notes = () => {
                       className="form-control"
                       id="title"
                       name="title"
+                      value={note.title}
                       aria-describedby="titlelHelp"
                       placeholder="Enter title"
                       onChange={onChange}
@@ -88,6 +89,7 @@ const Notes = () => {
                       className="form-control"
                       id="description"
                       name="description"
+                      value={note.description}
                       placeholder="Enter Description"
                       onChange={onChange}
                     />
@@ -99,6 +101,7 @@ const Notes = () => {
                       className="form-control"
                       id="tag"
                       name="tag"
+                      value={note.tag}
                       placeholder="Enter Tag"
                       onChange={onChange}
                     />
@@ -117,7 +120,7 @@ const Notes = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={handleAddClick}
+                onClick={handleUpdClick}
               >
                 Update Note
               </button>
