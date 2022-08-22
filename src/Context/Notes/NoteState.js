@@ -71,7 +71,7 @@ const NoteState = (props) => {
       body: JSON.stringify(title, description, tag), // body data type must match "Content-Type" header
     });
     const json = response.json(); // parses JSON response into native JavaScript objects
-
+    console.log(json);
     //Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
