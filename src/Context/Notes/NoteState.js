@@ -56,7 +56,7 @@ const NoteState = (props) => {
     setnotes(delNote);
   };
   //Edit a note
-  const editNote = async (id, description, title, tag) => {
+  const editNote = async (id, title, description, tag) => {
     //API Call
     // Example POST method implementation:
     // Default options are marked with *
@@ -68,19 +68,22 @@ const NoteState = (props) => {
         authToken:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
       },
-      body: JSON.stringify(title, description, tag), // body data type must match "Content-Type" header
+      body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
-    console.log(json);
+    const json = await response.json(); // parses JSON response into native JavaScript objects
+    // Deep copy of notes
+    let newNotes = JSON.parse(JSON.stringify(notes));
     //Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
       }
     }
+    setnotes(newNotes);
   };
 
   return (
