@@ -31,6 +31,8 @@ const AddNote = () => {
               aria-describedby="titlelHelp"
               placeholder="Enter title"
               onChange={onChange}
+              minLength={3}
+              required
             />
           </div>
           <div className="form-group">
@@ -42,6 +44,8 @@ const AddNote = () => {
               name="description"
               placeholder="Enter Description"
               onChange={onChange}
+              minLength={5}
+              required
             />
           </div>
           <div className="form-group">
@@ -53,12 +57,14 @@ const AddNote = () => {
               name="tag"
               placeholder="Enter Tag"
               onChange={onChange}
+              required
             />
           </div>
           <button
             type="submit"
             onClick={handleAddClick}
             className="btn btn-primary"
+            disabled={note.title.length < 3 || note.description.length < 5}
           >
             Add note
           </button>

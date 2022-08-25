@@ -91,6 +91,8 @@ const Notes = () => {
                       aria-describedby="titlelHelp"
                       placeholder="Enter title"
                       onChange={onChange}
+                      minLength={3}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -103,6 +105,8 @@ const Notes = () => {
                       value={note.description}
                       placeholder="Enter Description"
                       onChange={onChange}
+                      minLength={5}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -115,6 +119,7 @@ const Notes = () => {
                       value={note.tag}
                       placeholder="Enter Tag"
                       onChange={onChange}
+                      required
                     />
                   </div>
                 </form>
@@ -133,7 +138,9 @@ const Notes = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleUpdClick}
+                disabled={note.title.length < 3 || note.description.length < 5}
               >
+                {" "}
                 Update Note
               </button>
             </div>
@@ -142,6 +149,7 @@ const Notes = () => {
       </div>
       <div className="container my-3">
         <h1>Your Notes</h1>
+        {notes.length === 0 && "No notes to display"}
         <div className="row">
           {notes.map((note) => {
             return (
