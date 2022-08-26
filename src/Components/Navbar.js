@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation, Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -47,19 +47,13 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
+          <form className="d-flex">
+            <Link className="btn btn-primary" to="/signIn" role="button">
+              Sign In
+            </Link>
+            <Link className="btn btn-primary mx-2" to="/signUp" role="button">
+              Sign Up
+            </Link>
           </form>
         </div>
       </nav>
