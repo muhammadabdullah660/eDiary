@@ -31,7 +31,7 @@ const Notes = () => {
 
   const handleUpdClick = (e) => {
     editNote(note.id, note.title, note.description, note.tag);
-    console.log(note);
+    //console.log(note);
     refClose.current.click();
   };
   const onChange = (e) => {

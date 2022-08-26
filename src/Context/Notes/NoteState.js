@@ -48,8 +48,8 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
       },
     });
+    // eslint-disable-next-line
     const json = response.json(); // parses JSON response into native JavaScript objects
-    console.log(json);
     const delNote = notes.filter((note) => {
       return note._id !== id;
     });
@@ -69,7 +69,7 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmFkMjI4Mzk4YjQ2Y2MxMTE3MjA0In0sImlhdCI6MTY2MDY3MDcwNH0.YGXi9MlW0R9JgDCNXv2uzGlAJ9TqyX98y1u0f2aIiqs",
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
-    });
+    }); // eslint-disable-next-line
     const json = await response.json(); // parses JSON response into native JavaScript objects
     // Deep copy of notes
     let newNotes = JSON.parse(JSON.stringify(notes));
