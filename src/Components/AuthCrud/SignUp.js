@@ -72,6 +72,8 @@ const SignUp = () => {
             name="password"
             placeholder="Password"
             onChange={onChange}
+            required
+            minLength={8}
           />
         </div>
         <div className="form-group">
@@ -84,6 +86,8 @@ const SignUp = () => {
             name="cpassword"
             placeholder="Confirm Password"
             onChange={onChange}
+            required
+            minLength={8}
           />
         </div>
 
