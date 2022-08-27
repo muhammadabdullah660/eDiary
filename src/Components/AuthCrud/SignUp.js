@@ -26,7 +26,7 @@ const SignUp = () => {
     if (json.success) {
       //save the auth token and redirect
       localStorage.setItem("token", json.token);
-      navigate("/");
+      navigate("/signIn");
     } else {
       alert("Invalid Credentials");
     }
